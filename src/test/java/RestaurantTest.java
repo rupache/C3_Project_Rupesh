@@ -50,20 +50,18 @@ class RestaurantTest {
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>MENU<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     @Test
     public void adding_item_to_menu_should_increase_menu_size_by_1(){
-
-
         int initialMenuSize = restaurant.getMenu().size();
         restaurant.addToMenu("Sizzling brownie",319);
         assertEquals(initialMenuSize+1,restaurant.getMenu().size());
     }
+
     @Test
     public void removing_item_from_menu_should_decrease_menu_size_by_1() throws itemNotFoundException {
-
-
         int initialMenuSize = restaurant.getMenu().size();
         restaurant.removeFromMenu("Vegetable lasagne");
         assertEquals(initialMenuSize-1,restaurant.getMenu().size());
     }
+
     @Test
     public void removing_item_that_does_not_exist_should_throw_exception() {
 
@@ -71,4 +69,22 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>ORDER VALUE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    @Test
+    public void get_order_value_should_return_total_value_of_the_order_when_list_of_item_names_is_passed_to_it(){
+        String[] selectedMenuItems = {"Sweet corn soup", "Vegetable lasagne"};
+        int orderValue = restaurant.getOrderValue(selectedMenuItems);
+        assertEquals(119 + 269 , orderValue);
+    }
+
+    @Test
+    public void get_order_value_should_return_zero_when_empty_list_of_item_names_is_passed_to_it(){
+        String[] selectedMenuItems = {};
+        int orderValue = restaurant.getOrderValue(selectedMenuItems);
+        assertEquals(0 , orderValue);
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER VALUE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
